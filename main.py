@@ -83,6 +83,7 @@ def get_ydl_opts(user_dir, is_extractor=False):
         'logger': NullLogger(), # Silences all terminal output, including hard errors
         'quiet': True,
         'no_warnings': True,
+        'ffmpeg_location': r'C:\yt-dlp', # Explicitly hooks into your local ffmpeg binary
         'extractor_args': {'tiktok': {'web_id': 'random', 'app_info': '1180'}},
         'socket_timeout': 15,
         'retries': 3,
@@ -274,8 +275,27 @@ def signal_handler(sig, frame):
 
 signal.signal(signal.SIGINT, signal_handler)
 
+def perform_update():
+    import sys, subprocess
+    current_v = yt_dlp.version.__version__
+    console.print(f"[*] Current Engine Version: [bold cyan]{current_v}[/]")
+    
+    with console.status("[bold yellow]Contacting PyPI and fetching bleeding-edge yt-dlp core...[/]"):
+        try:
+            # sys.executable ensures we update the current venv's pip package perfectly
+            subprocess.check_call(
+                [sys.executable, "-m", "pip", "install", "-U", "yt-dlp[default]"],
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+            )
+            console.print("\n[bold green]✔ Engine completely upgraded! Please restart the script to apply the core upgrades.[/]")
+            os._exit(0)
+        except Exception as e:
+            console.print(f"\n[bold red]✖ Update failed:[/] {e}")
+
 if __name__ == "__main__":
-    console.print(Panel("[bold white]TikTok FastBulk: RICH ANALYTICS EDITION v4.0[/]", style="blue"))
-    u_input = console.input("[bold]Enter Username:[/] ")
-    if u_input:
+    console.print(Panel("[bold white]TikTok FastBulk: RICH ANALYTICS EDITION v5.0[/]", style="blue"))
+    u_input = console.input("[bold]Enter Username (or type 'update' to upgrade engine):[/] ")
+    if u_input.strip().lower() == 'update':
+        perform_update()
+    elif u_input:
         fast_bulk_download(u_input)
