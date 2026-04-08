@@ -46,6 +46,11 @@ overall_progress = Progress(
 )
 main_task = None
 
+class NullLogger:
+    def debug(self, msg): pass
+    def warning(self, msg): pass
+    def error(self, msg): pass
+
 def get_thread_slot_id():
     if getattr(thread_local, 'slot_id', None) is None:
         thread_local.slot_id = slot_queue.get()
@@ -73,8 +78,9 @@ def master_progress_hook(d):
 
 def get_ydl_opts(user_dir, is_extractor=False):
     opts = {
-        'format': 'best', # Using 'best' downloads a unified MP4 instantly without needing FFMPEG merging later
+        'format': 'best[vcodec!=none]', # Enforces having a video stream! Instantly rejects audio-only photo posts
         'impersonate': CHROME_TARGET,
+        'logger': NullLogger(), # Silences all terminal output, including hard errors
         'quiet': True,
         'no_warnings': True,
         'extractor_args': {'tiktok': {'web_id': 'random', 'app_info': '1180'}},
@@ -82,6 +88,10 @@ def get_ydl_opts(user_dir, is_extractor=False):
         'retries': 3,
         'nopart': True,
         'overwrites': True,
+        # Bypasses TikTok's notorious end-of-file CDN speed limit penalty (drops to 2kbps)
+        'throttledratelimit': 100000, # If speed drops below 100 KB/s, reconnect instantly!
+        'http_chunk_size': 1048576,   # Break files into incredibly small 1MB chunks so the CDN never flags length
+        'concurrent_fragment_downloads': 5, # Download those 1MB pieces parallelly
         'progress_hooks': [master_progress_hook] if not is_extractor else [],
     }
     if os.path.exists(COOKIE_FILE):
