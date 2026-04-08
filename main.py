@@ -178,37 +178,80 @@ def fast_bulk_download(input_name):
     if not os.path.exists(user_dir): os.makedirs(user_dir)
     
     full_clean(user_dir)
-    console.print(f"[*] Fetching video metadata for [bold yellow]@{username}[/]...")
 
-    video_urls = []
-    with yt_dlp.YoutubeDL(get_ydl_opts(user_dir, is_extractor=True)) as ydl:
-        info = ydl.extract_info(f"https://www.tiktok.com/@{username}", download=False)
-        video_urls = [f"https://www.tiktok.com/@{username}/video/{e['id']}" for e in info.get('entries', []) if e]
-
-    if not video_urls:
-         console.print("[red]No videos found. Check username or cookies.[/]")
-         return
-
-    stats["total"] = len(video_urls)
+    stats["total"] = 0
     stats["start_time"] = time.time()
-    main_task = overall_progress.add_task(f"Downloading @{username}", total=stats["total"])
+    # Using 1 initially to trigger a definite bar structure before expanding dynamically
+    main_task = overall_progress.add_task(f"Downloading @{username}", total=1) 
+    
+    url_queue = queue.Queue()
+    extractor_done = threading.Event()
+
+    def extractor_producer():
+        try:
+            with yt_dlp.YoutubeDL(get_ydl_opts(user_dir, is_extractor=True)) as ydl:
+                info = ydl.extract_info(f"https://www.tiktok.com/@{username}", download=False)
+                # By dropping the list comprehension, this is evaluated lazily as a generator
+                for e in info.get('entries', []):
+                    if shutdown_event.is_set(): break
+                    if e and 'id' in e:
+                        url_queue.put(f"https://www.tiktok.com/@{username}/video/{e['id']}")
+                        
+                        # Dynamically push the target completion forward as metadata discovers new files!
+                        with status_lock:
+                            stats['total'] += 1
+                        overall_progress.update(main_task, total=stats['total'])
+                        
+                        # Edge case for an empty profile instantly ending
+                if stats['total'] == 0:
+                    overall_progress.update(main_task, total=0)
+        except Exception:
+            pass
+        finally:
+            extractor_done.set()
+
+    t_producer = threading.Thread(target=extractor_producer)
+    t_producer.daemon = True
+    t_producer.start()
 
     with Live(generate_dashboard(), refresh_per_second=10) as live:
         with ThreadPoolExecutor(max_workers=CONCURRENT_VIDEOS) as executor:
-            future_to_url = {executor.submit(download_worker, url, user_dir): url for url in video_urls}
-            not_done = set(future_to_url.keys())
+            not_done = set()
             
-            while not_done and not shutdown_event.is_set():
-                live.update(generate_dashboard())
-                done, not_done = concurrent.futures.wait(not_done, timeout=0.25)
+            while not shutdown_event.is_set():
+                # Rapidly inject new URLs into free threaded worker slots instantly
+                while len(not_done) < CONCURRENT_VIDEOS:
+                    try:
+                        url = url_queue.get_nowait()
+                        future = executor.submit(download_worker, url, user_dir)
+                        not_done.add(future)
+                    except queue.Empty:
+                        break
                 
-                for future in done:
-                    try: success = future.result()
-                    except Exception: success = False
+                # Exit condition: Extractor is fully exhausted, queue is empty, and workers are done
+                if extractor_done.is_set() and url_queue.empty() and len(not_done) == 0:
+                    if stats['total'] > 0: overall_progress.update(main_task, completed=stats['total'])
+                    live.update(generate_dashboard())
+                    break
+                
+                live.update(generate_dashboard())
+                
+                if not_done:
+                    # Let the workers do their magic for exactly one tick of the UI (10 FPS)
+                    done, not_done = concurrent.futures.wait(not_done, timeout=0.1)
                     
-                    if success: stats["completed"] += 1
-                    else: stats["failed"] += 1
-                    overall_progress.update(main_task, advance=1)
+                    for future in done:
+                        try: success = future.result()
+                        except Exception: success = False
+                        
+                        with status_lock:
+                            if success: stats["completed"] += 1
+                            else: stats["failed"] += 1
+                            
+                        overall_progress.update(main_task, advance=1)
+                else:
+                    # If workers are empty and extractor is catching up at the very beginning
+                    time.sleep(0.1)
             
             if shutdown_event.is_set():
                 for future in not_done: future.cancel()
@@ -218,7 +261,7 @@ def fast_bulk_download(input_name):
     elapsed_str = time.strftime("%H:%M:%S", time.gmtime(elapsed))
     
     final_report = Group(
-        Panel(f"Download Session Completed in [bold cyan]{elapsed_str}[/]", style="green"),
+        Panel(f"Streaming Session Completed in [bold cyan]{elapsed_str}[/]", style="green"),
         Text(f"Total: {stats['total']} | Success: {stats['completed']} | Failed (Likely Photo Posts): {stats['failed']}", style="bold white", justify="center")
     )
     console.print("\n")
