@@ -4,6 +4,8 @@ import signal
 import time
 import glob
 import concurrent.futures
+import threading
+import queue
 from concurrent.futures import ThreadPoolExecutor
 from threading import Event, Lock
 from yt_dlp.networking.impersonate import ImpersonateTarget
@@ -18,76 +20,70 @@ from rich.align import Align
 from rich.text import Text
 
 # --- CONFIGURATION ---
-CONCURRENT_VIDEOS = 10
-COOKIE_FILE = 'tiktok_cookies.txt' # Optional cookie file
+CONCURRENT_VIDEOS = 15  # Increased massively due to optimizations
+COOKIE_FILE = 'tiktok_cookies.txt'
 CHROME_TARGET = ImpersonateTarget.from_str('chrome')
 shutdown_event = Event()
 console = Console()
 
-# Global state for UI
+# UI State
 stats = {
-    "total": 0, 
-    "completed": 0, 
-    "failed": 0,
-    "start_time": 0,
+    "total": 0, "completed": 0, "failed": 0, "start_time": 0,
 }
-worker_status = {} # {vid: {'status': '', 'speed': '', 'percent': '', 'eta': ''}}
+
+worker_status = {i: {'vid': '-', 'status': 'Idle', 'speed': '-', 'percent': '-', 'eta': '-'} for i in range(CONCURRENT_VIDEOS)}
 status_lock = Lock()
 
+slot_queue = queue.Queue()
+for i in range(CONCURRENT_VIDEOS):
+    slot_queue.put(i)
+
+thread_local = threading.local()
+
 overall_progress = Progress(
-    SpinnerColumn(),
-    TextColumn("[progress.description]{task.description}"),
-    BarColumn(),
-    TaskProgressColumn(),
-    TimeElapsedColumn(),
+    SpinnerColumn(), TextColumn("[progress.description]{task.description}"),
+    BarColumn(), TaskProgressColumn(), TimeElapsedColumn(),
 )
 main_task = None
 
-def progress_hook(d):
+def get_thread_slot_id():
+    if getattr(thread_local, 'slot_id', None) is None:
+        thread_local.slot_id = slot_queue.get()
+    return thread_local.slot_id
+
+def master_progress_hook(d):
     if shutdown_event.is_set():
         raise ValueError("Download Cancelled by User")
-        
-    video_id = d.get('info_dict', {}).get('id', 'Unknown')
-    if d['status'] == 'downloading':
-        speed = d.get('_speed_str', 'N/A')
-        percent = d.get('_percent_str', '  0%')
-        eta = d.get('_eta_str', 'N/A')
-        with status_lock:
-            if video_id not in worker_status:
-                worker_status[video_id] = {}
-            worker_status[video_id].update({
-                'status': 'Downloading',
-                'speed': speed,
-                'percent': percent,
-                'eta': eta
-            })
-    elif d['status'] == 'finished':
-        with status_lock:
-            if video_id in worker_status:
-                worker_status[video_id].update({
-                    'status': 'Merging/Finalizing',
-                    'speed': '-',
-                    'percent': '100%',
-                    'eta': '-'
+    
+    if getattr(thread_local, 'slot_id', None) is not None:
+        if d['status'] == 'downloading':
+            with status_lock:
+                worker_status[thread_local.slot_id].update({
+                    'status': 'Downloading',
+                    'speed': d.get('_speed_str', 'N/A'),
+                    'percent': d.get('_percent_str', '  0%'),
+                    'eta': d.get('_eta_str', 'N/A')
+                })
+        elif d['status'] == 'finished':
+            with status_lock:
+                worker_status[thread_local.slot_id].update({
+                    'status': 'Finalizing/Verifying',
+                    'speed': '-', 'percent': '100%', 'eta': '-'
                 })
 
 def get_ydl_opts(user_dir, is_extractor=False):
     opts = {
-        'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
-        'merge_output_format': 'mp4',
+        'format': 'best', # Using 'best' downloads a unified MP4 instantly without needing FFMPEG merging later
         'impersonate': CHROME_TARGET,
         'quiet': True,
         'no_warnings': True,
-        'ffmpeg_location': 'C:/yt-dlp',
         'extractor_args': {'tiktok': {'web_id': 'random', 'app_info': '1180'}},
-        'socket_timeout': 30,
-        'retries': 10,
+        'socket_timeout': 15,
+        'retries': 3,
         'nopart': True,
         'overwrites': True,
-        'concurrent_fragment_downloads': 6, # Massive speedup
-        'progress_hooks': [progress_hook],
+        'progress_hooks': [master_progress_hook] if not is_extractor else [],
     }
-    # Optional Cookie integration
     if os.path.exists(COOKIE_FILE):
         opts['cookiefile'] = COOKIE_FILE
         
@@ -100,38 +96,41 @@ def get_ydl_opts(user_dir, is_extractor=False):
         })
     return opts
 
-def clean_stray_files(user_dir):
-    garbage = ['*.mp3', '*.m4a', '*.webm', '*.tmp', '*.part', '*.ytdl', '*.f*']
-    for ext in garbage:
-        for f in glob.glob(os.path.join(user_dir, ext)):
-            try: os.remove(f)
-            except: pass
+def cleanup_err_files(user_dir, video_id):
+    try:
+        for f in glob.glob(os.path.join(user_dir, f"*{video_id}*.*")):
+            if f.endswith('.temp') or f.endswith('.part') or f.endswith('.ytdl'):
+                os.remove(f)
+    except: pass
 
 def download_worker(url, user_dir):
     if shutdown_event.is_set(): return False
+    
+    slot_id = get_thread_slot_id()
     video_id = url.split('/')[-1]
     
     with status_lock:
-        worker_status[video_id] = {
-            'status': 'Initializing',
-            'speed': '-',
-            'percent': '0%',
-            'eta': '-'
-        }
+        worker_status[slot_id].update({
+            'vid': video_id, 'status': 'Initializing', 'speed': '-', 'percent': '0%', 'eta': '-'
+        })
         
     try:
-        with yt_dlp.YoutubeDL(get_ydl_opts(user_dir)) as ydl:
-            ydl.download([url])
-        clean_stray_files(user_dir)
+        # Cache ydl instance per thread to eliminate initialization latency
+        if getattr(thread_local, 'ydl', None) is None:
+            thread_local.ydl = yt_dlp.YoutubeDL(get_ydl_opts(user_dir))
+            
+        thread_local.ydl.download([url])
         return True
-    except:
-        clean_stray_files(user_dir)
+    except Exception:
+        cleanup_err_files(user_dir, video_id)
         return False
+    finally:
+        with status_lock:
+            worker_status[slot_id] = {'vid': '-', 'status': 'Idle', 'speed': '-', 'percent': '-', 'eta': '-'}
 
 def generate_dashboard():
-    """Builds the comprehensive Rich UI Layout"""
-    # Active Workers Table
     table = Table(title="[bold magenta]Active Worker Analytics[/]", expand=True, border_style="cyan")
+    table.add_column("Worker Thread", style="dim", width=15)
     table.add_column("Video ID", style="dim cyan", width=20)
     table.add_column("Status", style="bold yellow")
     table.add_column("Progress", style="bold green", justify="right")
@@ -139,40 +138,28 @@ def generate_dashboard():
     table.add_column("ETA", style="bold red", justify="right")
 
     with status_lock:
-        # Show recent active workers up to limit
-        active_items = list(worker_status.items())[-CONCURRENT_VIDEOS:]
-        for vid, data in active_items:
-            table.add_row(
-                vid, 
-                data.get('status', 'Unknown'), 
-                data.get('percent', '0%'), 
-                data.get('speed', '-'), 
-                data.get('eta', '-')
-            )
-        
-        # Fill empty rows
-        for _ in range(CONCURRENT_VIDEOS - len(active_items)):
-            table.add_row("-", "[dim]Idle[/]", "-", "-", "-")
+        for slot_id in range(CONCURRENT_VIDEOS):
+            d = worker_status[slot_id]
+            table.add_row(f"Thread-{slot_id+1:02d}", d['vid'], d['status'], d['percent'], d['speed'], d['eta'])
 
-    # Overall Summary Panel
     elapsed = time.time() - stats["start_time"] if stats["start_time"] else 0
     elapsed_str = time.strftime("%H:%M:%S", time.gmtime(elapsed))
     
     summary_text = (
-        f"[bold cyan]Total Videos:[/] {stats['total']}  |  "
-        f"[bold green]Success:[/] {stats['completed']}  |  "
-        f"[bold red]Failed (Photo Posts):[/] {stats['failed']}  |  "
-        f"[bold yellow]Time Elapsed:[/] {elapsed_str}"
+        f"[bold cyan]Total Videos:[/] {stats['total']}  |  [bold green]Success:[/] {stats['completed']}  |  "
+        f"[bold red]Failed (Photo Posts):[/] {stats['failed']}  |  [bold yellow]Time Elapsed:[/] {elapsed_str}"
     )
     
     summary_panel = Panel(Align.center(summary_text), style="bold white on black", border_style="green")
     
-    group = Group(
-        Panel(overall_progress, title="[bold blue]Overall Job Progress[/]", border_style="blue"),
-        table,
-        summary_panel
-    )
-    return group
+    return Group(Panel(overall_progress, title="[bold blue]Overall Job Progress[/]", border_style="blue"), table, summary_panel)
+
+def full_clean(user_dir):
+    garbage = ['*.mp3', '*.m4a', '*.webm', '*.tmp', '*.part', '*.ytdl', '*.f*']
+    for ext in garbage:
+        for f in glob.glob(os.path.join(user_dir, ext)):
+            try: os.remove(f)
+            except: pass
 
 def fast_bulk_download(input_name):
     global main_task
@@ -180,7 +167,7 @@ def fast_bulk_download(input_name):
     user_dir = os.path.join("downloads", username)
     if not os.path.exists(user_dir): os.makedirs(user_dir)
     
-    clean_stray_files(user_dir)
+    full_clean(user_dir)
     console.print(f"[*] Fetching video metadata for [bold yellow]@{username}[/]...")
 
     video_urls = []
@@ -194,44 +181,29 @@ def fast_bulk_download(input_name):
 
     stats["total"] = len(video_urls)
     stats["start_time"] = time.time()
-    
     main_task = overall_progress.add_task(f"Downloading @{username}", total=stats["total"])
 
-    # Live Display logic with non-blocking updates
     with Live(generate_dashboard(), refresh_per_second=10) as live:
         with ThreadPoolExecutor(max_workers=CONCURRENT_VIDEOS) as executor:
             future_to_url = {executor.submit(download_worker, url, user_dir): url for url in video_urls}
             not_done = set(future_to_url.keys())
             
             while not_done and not shutdown_event.is_set():
-                # Refresh UI every cycle
                 live.update(generate_dashboard())
-                
-                # Check for completed futures with a small timeout to allow UI update
                 done, not_done = concurrent.futures.wait(not_done, timeout=0.25)
                 
                 for future in done:
-                    url = future_to_url[future]
-                    try:
-                        success = future.result()
-                    except Exception:
-                        success = False
-                        
-                    vid_id = url.split('/')[-1]
+                    try: success = future.result()
+                    except Exception: success = False
                     
                     if success: stats["completed"] += 1
                     else: stats["failed"] += 1
-                    
-                    # Update Progress and Cleanup Status
                     overall_progress.update(main_task, advance=1)
-                    with status_lock:
-                        if vid_id in worker_status: del worker_status[vid_id]
             
             if shutdown_event.is_set():
-                for future in not_done:
-                    future.cancel()
+                for future in not_done: future.cancel()
 
-    clean_stray_files(user_dir)
+    full_clean(user_dir)
     elapsed = time.time() - stats["start_time"]
     elapsed_str = time.strftime("%H:%M:%S", time.gmtime(elapsed))
     
@@ -243,15 +215,14 @@ def fast_bulk_download(input_name):
     console.print(final_report)
 
 def signal_handler(sig, frame):
-    if shutdown_event.is_set():
-        os._exit(1)
+    if shutdown_event.is_set(): os._exit(1)
     shutdown_event.set()
     console.print("\n[bold red blink]Abort signal received! Stopping downloads gracefully... (Press Ctrl+C again to force exit)[/]")
 
 signal.signal(signal.SIGINT, signal_handler)
 
 if __name__ == "__main__":
-    console.print(Panel("[bold white]TikTok FastBulk: RICH ANALYTICS EDITION v3.0[/]", style="blue"))
+    console.print(Panel("[bold white]TikTok FastBulk: RICH ANALYTICS EDITION v4.0[/]", style="blue"))
     u_input = console.input("[bold]Enter Username:[/] ")
     if u_input:
         fast_bulk_download(u_input)
