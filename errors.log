@@ -1,0 +1,90 @@
+[2026-04-08 18:21:11] yt-dlp Core Error - 
+[2026-04-08 18:21:15] yt-dlp Core Error - 
+[2026-04-08 18:21:21] yt-dlp Core Error - 
+[2026-04-08 18:21:25] yt-dlp Core Error - 
+[2026-04-08 18:21:37] yt-dlp Core Error - 
+[2026-04-08 18:21:49] yt-dlp Core Error - 
+[2026-04-08 18:22:03] yt-dlp Core Error - 
+[2026-04-08 18:50:54] yt-dlp Core Error - ERROR: [TikTok] 7477620294228724997: Unable to download webpage: Failed to perform, curl: (28) Connection timed out after 15010 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details. (caused by TransportError('Failed to perform, curl: (28) Connection timed out after 15010 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.'))
+[2026-04-08 18:50:54] Download Failed for 7477620294228724997 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\networking\_curlcffi.py", line 291, in _send
+    curl_response = session.request(
+        method=request.method,
+    ...<9 lines>...
+        stream=True,
+    )
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\curl_cffi\requests\session.py", line 630, in request
+    raise first_element
+curl_cffi.requests.exceptions.RequestException: Failed to perform, curl: (28) Connection timed out after 15010 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\extractor\common.py", line 912, in _request_webpage
+    return self._downloader.urlopen(self._create_request(url_or_request, data, headers, query, extensions))
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 4260, in urlopen
+    return self._request_director.send(req)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\networking\common.py", line 117, in send
+    response = handler.send(request)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\networking\_curlcffi.py", line 230, in send
+    response = super().send(request)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\networking\_helper.py", line 194, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\networking\common.py", line 359, in send
+    return self._send(request)
+           ~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\networking\_curlcffi.py", line 321, in _send
+    raise TransportError(cause=e) from e
+yt_dlp.networking.exceptions.TransportError: Failed to perform, curl: (28) Connection timed out after 15010 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1833, in __extract_info
+    ie_result = ie.extract(url)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\extractor\common.py", line 765, in extract
+    ie_result = self._real_extract(url)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\extractor\tiktok.py", line 985, in _real_extract
+    video_data, status = self._extract_web_data_and_status(url, video_id)
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\extractor\tiktok.py", line 293, in _extract_web_data_and_status
+    webpage = get_webpage()
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\extractor\tiktok.py", line 279, in get_webpage
+    res = self._download_webpage_handle(url, video_id, note, fatal=fatal, impersonate=True)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\extractor\common.py", line 976, in _download_webpage_handle
+    urlh = self._request_webpage(url_or_request, video_id, note, errnote, fatal, data=data,
+                                 headers=headers, query=query, expected_status=expected_status,
+                                 impersonate=impersonate, require_impersonation=require_impersonation)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\extractor\common.py", line 925, in _request_webpage
+    raise ExtractorError(errmsg, cause=err)
+yt_dlp.utils.ExtractorError: [TikTok] 7477620294228724997: Unable to download webpage: Failed to perform, curl: (28) Connection timed out after 15010 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details. (caused by TransportError('Failed to perform, curl: (28) Connection timed out after 15010 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 175, in download_worker
+    thread_local.ydl.download([url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7477620294228724997: Unable to download webpage: Failed to perform, curl: (28) Connection timed out after 15010 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details. (caused by TransportError('Failed to perform, curl: (28) Connection timed out after 15010 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.'))

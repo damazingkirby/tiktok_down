@@ -26,6 +26,13 @@ CHROME_TARGET = ImpersonateTarget.from_str('chrome')
 shutdown_event = Event()
 console = Console()
 
+PROXIES_FILE = 'proxies.txt'
+proxy_list = []
+if os.path.exists(PROXIES_FILE):
+    with open(PROXIES_FILE, 'r') as f:
+        proxy_list = [line.strip() for line in f if line.strip()]
+proxy_index = 0
+
 # UI State
 stats = {
     "total": 0, "completed": 0, "failed": 0, "start_time": 0,
@@ -46,21 +53,31 @@ overall_progress = Progress(
 )
 main_task = None
 
+import re
+def clean_msg(text):
+    ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
+    return ansi_escape.sub('', str(text)).strip()
+
+def log_error(vid_or_msg, error_details=""):
+    details = clean_msg(error_details)
+    if not details: return # Ignore blank lines that yt-dlp spits out
+    with status_lock:
+        with open('errors.log', 'a', encoding='utf-8') as f:
+            f.write(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] {vid_or_msg} - {details}\n")
+
 class NullLogger:
     def debug(self, msg): pass
     def warning(self, msg): pass
-    def error(self, msg): pass
+    def error(self, msg): log_error("yt-dlp Core Error", msg)
 
 class ExtractorLogger:
     def debug(self, msg):
-        # yt-dlp outputs something like: "[tiktok:user] soamelodie: Downloading API JSON page 4"
         if "page" in msg.lower() or "[tiktok:user]" in msg:
-            # We strip the internal prefix to make it look clean
             clean_msg = msg.split(":")[-1].strip()
             overall_progress.update(main_task, description=f"[bold yellow]Scanning Profile...[/] [dim]({clean_msg})[/]")
 
     def warning(self, msg): pass
-    def error(self, msg): pass
+    def error(self, msg): log_error("Extractor Error", msg)
 
 def get_thread_slot_id():
     if getattr(thread_local, 'slot_id', None) is None:
@@ -117,6 +134,12 @@ def get_ydl_opts(user_dir, is_extractor=False):
         # locking the file and stalling all your CPU threads!
         if is_extractor:
             opts['cookiefile'] = COOKIE_FILE
+            
+    if proxy_list:
+        global proxy_index
+        with status_lock:
+            opts['proxy'] = proxy_list[proxy_index % len(proxy_list)]
+            proxy_index += 1
         
     if is_extractor:
         opts['extract_flat'] = True
@@ -135,7 +158,7 @@ def cleanup_err_files(user_dir, video_id):
     except: pass
 
 def download_worker(url, user_dir):
-    if shutdown_event.is_set(): return False
+    if shutdown_event.is_set(): return (False, url)
     
     slot_id = get_thread_slot_id()
     video_id = url.split('/')[-1]
@@ -146,15 +169,16 @@ def download_worker(url, user_dir):
         })
         
     try:
-        # Cache ydl instance per thread to eliminate initialization latency
         if getattr(thread_local, 'ydl', None) is None:
             thread_local.ydl = yt_dlp.YoutubeDL(get_ydl_opts(user_dir))
             
         thread_local.ydl.download([url])
-        return True
-    except Exception:
+        return (True, url)
+    except Exception as e:
+        import traceback
+        log_error(f"Download Failed for {video_id}", traceback.format_exc())
         cleanup_err_files(user_dir, video_id)
-        return False
+        return (False, url)
     finally:
         with status_lock:
             worker_status[slot_id] = {'vid': '-', 'status': 'Idle', 'speed': '-', 'percent': '-', 'eta': '-'}
@@ -212,25 +236,27 @@ def fast_bulk_download(input_name):
         try:
             with yt_dlp.YoutubeDL(get_ydl_opts(user_dir, is_extractor=True)) as ydl:
                 info = ydl.extract_info(f"https://www.tiktok.com/@{username}", download=False)
-                # By dropping the list comprehension, this is evaluated lazily as a generator
                 for e in info.get('entries', []):
                     if shutdown_event.is_set(): break
                     if e and 'id' in e:
                         url_queue.put(f"https://www.tiktok.com/@{username}/video/{e['id']}")
                         
-                        # Dynamically push the target completion forward as metadata discovers new files!
                         with status_lock:
                             stats['total'] += 1
                         overall_progress.update(main_task, total=stats['total'])
                         
-                        # Edge case for an empty profile instantly ending
+                        # Anti-Ban Batch Pacing: Breathe for 2 seconds every 100 extractions!
+                        if stats['total'] > 0 and stats['total'] % 100 == 0:
+                            overall_progress.update(main_task, description="[bold yellow]Pacing Batch (Anti-Ban)...[/]")
+                            time.sleep(2)
+                            overall_progress.update(main_task, description="[bold yellow]Scanning Profile...[/]")
+                        
                 if stats['total'] == 0:
                     overall_progress.update(main_task, total=0)
                 else:
-                    # Switch the text back to downloading mode once we have all the URLs!
                     overall_progress.update(main_task, description=f"[bold green]Downloading @{username}[/]")
-        except Exception:
-            pass
+        except Exception as e:
+            log_error("Extractor Loop Error", str(e))
         finally:
             extractor_done.set()
 
@@ -241,9 +267,10 @@ def fast_bulk_download(input_name):
     with Live(generate_dashboard(), refresh_per_second=10) as live:
         with ThreadPoolExecutor(max_workers=CONCURRENT_VIDEOS) as executor:
             not_done = set()
+            failed_urls = []
+            retrying_mode = False
             
             while not shutdown_event.is_set():
-                # Rapidly inject new URLs into free threaded worker slots instantly
                 while len(not_done) < CONCURRENT_VIDEOS:
                     try:
                         url = url_queue.get_nowait()
@@ -252,29 +279,40 @@ def fast_bulk_download(input_name):
                     except queue.Empty:
                         break
                 
-                # Exit condition: Extractor is fully exhausted, queue is empty, and workers are done
+                # Exit condition extended for Retry Layer
                 if extractor_done.is_set() and url_queue.empty() and len(not_done) == 0:
-                    if stats['total'] > 0: overall_progress.update(main_task, completed=stats['total'])
-                    live.update(generate_dashboard())
-                    break
+                    if failed_urls and not retrying_mode:
+                        retrying_mode = True
+                        for u in failed_urls: url_queue.put(u)
+                        overall_progress.update(main_task, description=f"[bold yellow]Retrying {len(failed_urls)} Failed Items...[/]")
+                        stats['failed'] = 0 # Reset visually for the second sweep
+                        failed_urls.clear()
+                        time.sleep(5) # Cooldown before hammering again
+                        continue
+                    else:
+                        if stats['total'] > 0: overall_progress.update(main_task, completed=stats['total'])
+                        live.update(generate_dashboard())
+                        break
                 
                 live.update(generate_dashboard())
                 
                 if not_done:
-                    # Let the workers do their magic for exactly one tick of the UI (10 FPS)
                     done, not_done = concurrent.futures.wait(not_done, timeout=0.1)
-                    
                     for future in done:
-                        try: success = future.result()
-                        except Exception: success = False
+                        try: 
+                            success, url_val = future.result()
+                        except Exception: 
+                            success, url_val = False, None
                         
                         with status_lock:
-                            if success: stats["completed"] += 1
-                            else: stats["failed"] += 1
+                            if success: 
+                                stats["completed"] += 1
+                            else: 
+                                stats["failed"] += 1
+                                if url_val: failed_urls.append(url_val)
                             
                         overall_progress.update(main_task, advance=1)
                 else:
-                    # If workers are empty and extractor is catching up at the very beginning
                     time.sleep(0.1)
             
             if shutdown_event.is_set():
