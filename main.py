@@ -51,6 +51,17 @@ class NullLogger:
     def warning(self, msg): pass
     def error(self, msg): pass
 
+class ExtractorLogger:
+    def debug(self, msg):
+        # yt-dlp outputs something like: "[tiktok:user] soamelodie: Downloading API JSON page 4"
+        if "page" in msg.lower() or "[tiktok:user]" in msg:
+            # We strip the internal prefix to make it look clean
+            clean_msg = msg.split(":")[-1].strip()
+            overall_progress.update(main_task, description=f"[bold yellow]Scanning Profile...[/] [dim]({clean_msg})[/]")
+
+    def warning(self, msg): pass
+    def error(self, msg): pass
+
 def get_thread_slot_id():
     if getattr(thread_local, 'slot_id', None) is None:
         thread_local.slot_id = slot_queue.get()
@@ -80,23 +91,32 @@ def get_ydl_opts(user_dir, is_extractor=False):
     opts = {
         'format': 'best[vcodec!=none]', # Enforces having a video stream! Instantly rejects audio-only photo posts
         'impersonate': CHROME_TARGET,
-        'logger': NullLogger(), # Silences all terminal output, including hard errors
+        'logger': ExtractorLogger() if is_extractor else NullLogger(), # Feed API logs to UI during extraction!
         'quiet': True,
         'no_warnings': True,
         'ffmpeg_location': r'C:\yt-dlp', # Explicitly hooks into your local ffmpeg binary
-        'extractor_args': {'tiktok': {'web_id': 'random', 'app_info': '1180'}},
+        'extractor_args': {'tiktok': {
+            'web_id': 'random', 
+            'app_info': '1180',
+            'api_hostname': 'api16-normal-c-useast1a.tiktokv.com'
+        }},
+        'connector_args': {'force_no_http2': True}, # CRITICAL FOR PARALLEL CHUNKS!
         'socket_timeout': 15,
-        'retries': 3,
-        'nopart': True,
+        'retries': 5,
+        'nopart': False,
         'overwrites': True,
-        # Bypasses TikTok's notorious end-of-file CDN speed limit penalty (drops to 2kbps)
-        'throttledratelimit': 100000, # If speed drops below 100 KB/s, reconnect instantly!
-        'http_chunk_size': 1048576,   # Break files into incredibly small 1MB chunks so the CDN never flags length
-        'concurrent_fragment_downloads': 5, # Download those 1MB pieces parallelly
+        # Micro-chunks bypass the CDN throttle!
+        'http_chunk_size': 2621440,   # 2.5MB micro-chunks
+        'concurrent_fragment_downloads': 4, # 4 parallel sockets
+        'throttledratelimit': 25000, 
         'progress_hooks': [master_progress_hook] if not is_extractor else [],
     }
     if os.path.exists(COOKIE_FILE):
-        opts['cookiefile'] = COOKIE_FILE
+        # MASSIVE SPEED FIX: Only the extractor needs cookies to get the URLs. 
+        # By removing cookies from the 15 worker threads, we stop Windows from constantly 
+        # locking the file and stalling all your CPU threads!
+        if is_extractor:
+            opts['cookiefile'] = COOKIE_FILE
         
     if is_extractor:
         opts['extract_flat'] = True
@@ -182,8 +202,8 @@ def fast_bulk_download(input_name):
 
     stats["total"] = 0
     stats["start_time"] = time.time()
-    # Using 1 initially to trigger a definite bar structure before expanding dynamically
-    main_task = overall_progress.add_task(f"Downloading @{username}", total=1) 
+    # Let the user know we are specifically scanning first!
+    main_task = overall_progress.add_task(f"[bold yellow]Scanning Profile...[/]", total=1) 
     
     url_queue = queue.Queue()
     extractor_done = threading.Event()
@@ -206,6 +226,9 @@ def fast_bulk_download(input_name):
                         # Edge case for an empty profile instantly ending
                 if stats['total'] == 0:
                     overall_progress.update(main_task, total=0)
+                else:
+                    # Switch the text back to downloading mode once we have all the URLs!
+                    overall_progress.update(main_task, description=f"[bold green]Downloading @{username}[/]")
         except Exception:
             pass
         finally:
