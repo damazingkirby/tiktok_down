@@ -372,11 +372,41 @@ def perform_update():
         except Exception as e:
             console.print(f"\n[bold red]✖ Update failed:[/] {e}")
 
+def perform_bulk_update():
+    """Scans all folders in downloads/ and refreshes them sequentially."""
+    dl_dir = "downloads"
+    if not os.path.exists(dl_dir):
+        console.print(Panel("[bold red]ERROR: No 'downloads' directory found![/]", style="red"))
+        return
+
+    usernames = sorted([d for d in os.listdir(dl_dir) if os.path.isdir(os.path.join(dl_dir, d))])
+    if not usernames:
+        console.print(Panel("[bold yellow]No profile folders found in 'downloads/'.[/]", style="yellow"))
+        return
+
+    console.print(Panel(f"[bold cyan]Bulk Update Core Activated: Found {len(usernames)} profiles[/]", title="TikTok Bulk Updater", border_style="green"))
+
+    for i, user in enumerate(usernames, 1):
+        if shutdown_event.is_set(): break
+        console.print(f"\n[bold magenta]━━━━━━━━ Processing {i}/{len(usernames)}: @{user} ━━━━━━━━[/]")
+        try:
+            engine = TikTokEngine(user)
+            engine.run_pipeline()
+        except Exception as e:
+            console.print(f"[bold red]✖ Failed @{user}: {e}[/]")
+        
+        if i < len(usernames) and not shutdown_event.is_set():
+            time.sleep(2)
+
+    console.print(Panel("[bold green]All profiles successfully scanned and updated![/]", border_style="bold green"))
+
 if __name__ == "__main__":
     console.print(Panel("[bold white]TikTok FastBulk Pipeline (v7.0) Enterprise Object-Oriented Edition[/]", style="blue"))
-    u_input = console.input("[bold]Enter Username (or type 'update' to upgrade engine):[/] ")
+    u_input = console.input("[bold]Enter Username (or type 'update' or 'power'):[/] ")
     if u_input.strip().lower() == 'update':
         perform_update()
+    elif u_input.strip().lower() == 'power':
+        perform_bulk_update()
     elif u_input:
         engine = TikTokEngine(u_input)
         engine.run_pipeline()
