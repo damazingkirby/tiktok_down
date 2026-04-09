@@ -3718,3 +3718,1918 @@ ValueError: Pipeline Abort Triggered
   File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 128, in master_progress_hook
     raise ValueError("Pipeline Abort Triggered")
 ValueError: Pipeline Abort Triggered
+[2026-04-09 08:57:03] Pipeline Core Error - ERROR: [TikTok] 7595201878342814988: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:57:03] Execution Failed for 7595201878342814988 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7595201878342814988: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7595201878342814988: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:57:03] Pipeline Core Error - ERROR: [TikTok] 7614927898050399508: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:57:03] Execution Failed for 7614927898050399508 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7614927898050399508: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7614927898050399508: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:57:03] Pipeline Core Error - ERROR: [TikTok] 7616702209564232981: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:57:03] Execution Failed for 7616702209564232981 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7616702209564232981: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7616702209564232981: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:57:04] Pipeline Core Error - ERROR: [TikTok] 7595938928310422796: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:57:04] Execution Failed for 7595938928310422796 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7595938928310422796: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7595938928310422796: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:57:04] Pipeline Core Error - ERROR: [TikTok] 7614927898050399508: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:57:04] Execution Failed for 7614927898050399508 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7614927898050399508: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7614927898050399508: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:57:04] Pipeline Core Error - ERROR: [TikTok] 7595201878342814988: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:57:04] Execution Failed for 7595201878342814988 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7595201878342814988: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7595201878342814988: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:57:04] Pipeline Core Error - ERROR: [TikTok] 7616702209564232981: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:57:04] Execution Failed for 7616702209564232981 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7616702209564232981: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7616702209564232981: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:57:05] Pipeline Core Error - ERROR: [TikTok] 7595938928310422796: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:57:05] Execution Failed for 7595938928310422796 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7595938928310422796: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7595938928310422796: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:57:06] Pipeline Core Error - ERROR: [TikTok] 7562657472847121671: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:57:06] Execution Failed for 7562657472847121671 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7562657472847121671: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7562657472847121671: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:57:07] Pipeline Core Error - ERROR: [TikTok] 7562657472847121671: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:57:07] Execution Failed for 7562657472847121671 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7562657472847121671: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7562657472847121671: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:57:11] Pipeline Core Error - ERROR: [TikTok] 7512014533133749510: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:57:11] Execution Failed for 7512014533133749510 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7512014533133749510: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7512014533133749510: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:57:13] Pipeline Core Error - ERROR: [TikTok] 7512014533133749510: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:57:13] Execution Failed for 7512014533133749510 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7512014533133749510: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7512014533133749510: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:57:59] Pipeline Core Error - ERROR: unable to download video data: HTTP Error 404: Not Found
+[2026-04-09 08:57:59] Execution Failed for 7258669475921136902 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3544, in process_info
+    success, real_download = self.dl(temp_filename, info_dict)
+                             ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3285, in dl
+    return fd.download(name, new_info, subtitle)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\downloader\common.py", line 480, in download
+    ret = self.real_download(filename, info_dict)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\downloader\http.py", line 362, in real_download
+    establish_connection()
+    ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\downloader\http.py", line 119, in establish_connection
+    ctx.data = self.ydl.urlopen(request)
+               ~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 4260, in urlopen
+    return self._request_director.send(req)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\networking\common.py", line 117, in send
+    response = handler.send(request)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\networking\_curlcffi.py", line 230, in send
+    response = super().send(request)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\networking\_helper.py", line 194, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\networking\common.py", line 359, in send
+    return self._send(request)
+           ~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\networking\_curlcffi.py", line 326, in _send
+    raise HTTPError(response, redirect_loop=max_redirects_exceeded)
+yt_dlp.networking.exceptions.HTTPError: HTTP Error 404: Not Found
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3096, in process_video_result
+    self.process_info(new_info)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 189, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3553, in process_info
+    self.report_error(f'unable to download video data: {err}')
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: unable to download video data: HTTP Error 404: Not Found
+[2026-04-09 08:58:01] Pipeline Core Error - ERROR: unable to download video data: HTTP Error 404: Not Found
+[2026-04-09 08:58:01] Execution Failed for 7258669475921136902 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3544, in process_info
+    success, real_download = self.dl(temp_filename, info_dict)
+                             ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3285, in dl
+    return fd.download(name, new_info, subtitle)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\downloader\common.py", line 480, in download
+    ret = self.real_download(filename, info_dict)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\downloader\http.py", line 362, in real_download
+    establish_connection()
+    ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\downloader\http.py", line 119, in establish_connection
+    ctx.data = self.ydl.urlopen(request)
+               ~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 4260, in urlopen
+    return self._request_director.send(req)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\networking\common.py", line 117, in send
+    response = handler.send(request)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\networking\_curlcffi.py", line 230, in send
+    response = super().send(request)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\networking\_helper.py", line 194, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\networking\common.py", line 359, in send
+    return self._send(request)
+           ~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\networking\_curlcffi.py", line 326, in _send
+    raise HTTPError(response, redirect_loop=max_redirects_exceeded)
+yt_dlp.networking.exceptions.HTTPError: HTTP Error 404: Not Found
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3096, in process_video_result
+    self.process_info(new_info)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 189, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3553, in process_info
+    self.report_error(f'unable to download video data: {err}')
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: unable to download video data: HTTP Error 404: Not Found
+[2026-04-09 08:58:53] Execution Failed for 7396028139186474245 - Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3110, in process_video_result
+    self.record_download_archive(info_dict)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3850, in record_download_archive
+    with locked_file(fn, 'a', encoding='utf-8') as archive_file:
+         ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\utils\_utils.py", line 1667, in __exit__
+    self.f.close()
+    ~~~~~~~~~~~~^^
+PermissionError: [Errno 13] Permission denied
+[2026-04-09 08:58:59] Pipeline Core Error - ERROR: [TikTok] 7406959130172198150: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:58:59] Execution Failed for 7406959130172198150 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7406959130172198150: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7406959130172198150: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:59:01] Pipeline Core Error - ERROR: [TikTok] 7406959130172198150: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:59:01] Execution Failed for 7406959130172198150 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7406959130172198150: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7406959130172198150: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:59:11] Pipeline Core Error - ERROR: [TikTok] 7415282786564623622: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:59:11] Execution Failed for 7415282786564623622 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7415282786564623622: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7415282786564623622: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:59:12] Pipeline Core Error - ERROR: [TikTok] 7415282786564623622: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:59:12] Execution Failed for 7415282786564623622 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7415282786564623622: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7415282786564623622: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:59:13] Pipeline Core Error - ERROR: [TikTok] 7424207637178240262: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:59:13] Execution Failed for 7424207637178240262 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7424207637178240262: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7424207637178240262: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:59:14] Pipeline Core Error - ERROR: [TikTok] 7424207637178240262: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:59:14] Execution Failed for 7424207637178240262 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7424207637178240262: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7424207637178240262: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:59:17] Pipeline Core Error - ERROR: [TikTok] 7440718880538119479: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:59:17] Execution Failed for 7440718880538119479 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7440718880538119479: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7440718880538119479: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:59:22] Pipeline Core Error - ERROR: [TikTok] 7440718880538119479: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:59:22] Execution Failed for 7440718880538119479 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7440718880538119479: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7440718880538119479: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:59:26] Pipeline Core Error - ERROR: [TikTok] 7453718924882922758: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:59:26] Execution Failed for 7453718924882922758 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7453718924882922758: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7453718924882922758: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:59:27] Pipeline Core Error - ERROR: [TikTok] 7453718924882922758: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:59:27] Execution Failed for 7453718924882922758 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7453718924882922758: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7453718924882922758: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:59:42] Pipeline Core Error - ERROR: [TikTok] 7481027726929923383: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:59:42] Execution Failed for 7481027726929923383 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7481027726929923383: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7481027726929923383: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:59:44] Pipeline Core Error - ERROR: [TikTok] 7481027726929923383: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:59:44] Execution Failed for 7481027726929923383 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7481027726929923383: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7481027726929923383: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:59:56] Pipeline Core Error - ERROR: [TikTok] 7509389456210726200: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:59:56] Execution Failed for 7509389456210726200 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7509389456210726200: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7509389456210726200: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:59:58] Pipeline Core Error - ERROR: [TikTok] 7509389456210726200: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 08:59:58] Execution Failed for 7509389456210726200 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7509389456210726200: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7509389456210726200: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:00:00] Pipeline Core Error - ERROR: [TikTok] 7573208409856691464: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:00:00] Execution Failed for 7573208409856691464 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7573208409856691464: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7573208409856691464: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:00:01] Pipeline Core Error - ERROR: [TikTok] 7573208409856691464: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:00:01] Execution Failed for 7573208409856691464 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7573208409856691464: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7573208409856691464: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:36:00] Pipeline Core Error - ERROR: [TikTok] 7507370625833454853: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:36:00] Execution Failed for 7507370625833454853 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7507370625833454853: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7507370625833454853: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:36:01] Pipeline Core Error - ERROR: [TikTok] 7507370625833454853: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:36:01] Execution Failed for 7507370625833454853 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7507370625833454853: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7507370625833454853: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:36:08] Pipeline Core Error - ERROR: [TikTok] 7454633183108287750: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:36:08] Execution Failed for 7454633183108287750 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7454633183108287750: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7454633183108287750: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:36:10] Pipeline Core Error - ERROR: [TikTok] 7454633183108287750: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:36:10] Execution Failed for 7454633183108287750 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7454633183108287750: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7454633183108287750: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:36:38] Pipeline Core Error - ERROR: [TikTok] 7310600878405307654: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:36:38] Execution Failed for 7310600878405307654 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7310600878405307654: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7310600878405307654: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:36:39] Pipeline Core Error - ERROR: [TikTok] 7310600878405307654: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:36:39] Execution Failed for 7310600878405307654 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7310600878405307654: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7310600878405307654: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:40:28] Pipeline Core Error - ERROR: [TikTok] 7623721724915354887: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:40:28] Execution Failed for 7623721724915354887 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7623721724915354887: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7623721724915354887: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:40:29] Pipeline Core Error - ERROR: [TikTok] 7623721724915354887: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:40:29] Execution Failed for 7623721724915354887 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7623721724915354887: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7623721724915354887: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:40:51] Execution Failed for 7318458036740295941 - Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3110, in process_video_result
+    self.record_download_archive(info_dict)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3850, in record_download_archive
+    with locked_file(fn, 'a', encoding='utf-8') as archive_file:
+         ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\utils\_utils.py", line 1667, in __exit__
+    self.f.close()
+    ~~~~~~~~~~~~^^
+PermissionError: [Errno 13] Permission denied
+[2026-04-09 09:42:26] Execution Failed for 7479504011570203912 - PermissionError: [Errno 13] Permission denied
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3110, in process_video_result
+    self.record_download_archive(info_dict)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3850, in record_download_archive
+    with locked_file(fn, 'a', encoding='utf-8') as archive_file:
+         ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\utils\_utils.py", line 1667, in __exit__
+    self.f.close()
+    ~~~~~~~~~~~~^^
+PermissionError: [Errno 13] Permission denied
+[2026-04-09 09:54:56] Pipeline Core Error - ERROR: [TikTok] 7456030280571292933: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:54:56] Execution Failed for 7456030280571292933 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7456030280571292933: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7456030280571292933: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:54:58] Pipeline Core Error - ERROR: [TikTok] 7456030280571292933: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:54:58] Execution Failed for 7456030280571292933 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7456030280571292933: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7456030280571292933: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:55:04] Pipeline Core Error - ERROR: [TikTok] 7477942660452437253: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:55:04] Execution Failed for 7477942660452437253 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7477942660452437253: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7477942660452437253: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:55:07] Pipeline Core Error - ERROR: [TikTok] 7477942660452437253: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:55:07] Execution Failed for 7477942660452437253 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7477942660452437253: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7477942660452437253: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:55:09] Pipeline Core Error - ERROR: [TikTok] 7479681622284225847: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:55:09] Execution Failed for 7479681622284225847 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7479681622284225847: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7479681622284225847: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:55:12] Pipeline Core Error - ERROR: [TikTok] 7479681622284225847: Requested format is not available. Use --list-formats for a list of available formats
+[2026-04-09 09:55:12] Execution Failed for 7479681622284225847 - Traceback (most recent call last):
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1698, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1854, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1913, in process_ie_result
+    ie_result = self.process_video_result(ie_result, download=download)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3058, in process_video_result
+    raise ExtractorError(
+        'Requested format is not available. Use --list-formats for a list of available formats',
+        expected=True, video_id=info_dict['id'], ie=info_dict['extractor'])
+yt_dlp.utils.ExtractorError: [TikTok] 7479681622284225847: Requested format is not available. Use --list-formats for a list of available formats
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Documents\tiktok_scraper\main.py", line 234, in execution_stage
+    thread_local.ydl.download([task.url])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3670, in download
+    self.__download_wrapper(self.extract_info)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        url, force_generic_extractor=self.params.get('force_generic_extractor', False))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 3643, in wrapper
+    res = func(*args, **kwargs)
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1687, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1716, in wrapper
+    self.report_error(str(e), e.format_traceback())
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1154, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\Documents\tiktok_scraper\venv\Lib\site-packages\yt_dlp\YoutubeDL.py", line 1093, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [TikTok] 7479681622284225847: Requested format is not available. Use --list-formats for a list of available formats

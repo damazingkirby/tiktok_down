@@ -183,12 +183,17 @@ class TikTokEngine:
         """Metadata Stage: Constantly parses profile and feeds the PriorityQueue lazily."""
         try:
             with yt_dlp.YoutubeDL(self.get_ydl_opts(is_extractor=True)) as ydl:
-                info_dict = ydl.extract_info(f"https://www.tiktok.com/@{self.username}", download=False)
-                for e in info_dict.get('entries', []):
-                    if shutdown_event.is_set(): break
-                    if e and 'id' in e:
-                        vid_id = e['id']
-                        url = f"https://www.tiktok.com/@{self.username}/video/{vid_id}"
+                # Use process=False to get the raw generator instantly, bypassing the 30+ second blocking playlist resolve
+                info_dict = ydl.extract_info(f"https://www.tiktok.com/@{self.username}", download=False, process=False)
+                entries = info_dict.get('entries')
+                
+                if entries:
+                    for e in entries:
+                        if shutdown_event.is_set(): break
+                        if not e: continue
+                        if isinstance(e, dict) and 'id' in e:
+                            vid_id = e['id']
+                            url = f"https://www.tiktok.com/@{self.username}/video/{vid_id}"
                         
                         # Priority 1 is standard queue
                         task = VideoTask(priority=1, url=url, video_id=vid_id)
@@ -363,7 +368,7 @@ def perform_update():
                 stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
             )
             console.print("\n[bold green]✔ Engine completely upgraded! Please restart the script to apply the core upgrades.[/]")
-            os._exit(0)
+            sys.exit(0)
         except Exception as e:
             console.print(f"\n[bold red]✖ Update failed:[/] {e}")
 
