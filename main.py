@@ -82,10 +82,11 @@ class NullLogger:
     def error(self, msg): log_error("Pipeline Core Error", msg)
 
 class TikTokEngine:
-    """Total Overhaul (v7.0): Object-Oriented Controller Stage."""
+    """Total Overhaul (v7.6): Object-Oriented Controller with Multi-Mode Scanning."""
     
-    def __init__(self, username):
+    def __init__(self, username, deep_scan=False):
         self.username = username.strip().replace("@", "")
+        self.deep_scan = deep_scan
         self.user_dir = os.path.join("downloads", self.username)
         if not os.path.exists(self.user_dir):
             os.makedirs(self.user_dir)
@@ -102,21 +103,27 @@ class TikTokEngine:
             SpinnerColumn(), TextColumn("[progress.description]{task.description}"),
             BarColumn(), TaskProgressColumn(), TimeElapsedColumn(),
         )
-        self.main_task_id = self.progress_bar.add_task("[bold yellow]Scanning Profile...[/]", total=1)
+        scan_label = "[bold red]Power-Scanning[/]" if self.deep_scan else "[bold yellow]Scanning Profile[/]"
+        self.main_task_id = self.progress_bar.add_task(f"{scan_label} @{self.username}...", total=None)
         
         self.full_clean()
 
     def update_scanning_msg(self, msg):
-        self.progress_bar.update(self.main_task_id, description=f"[bold yellow]Scanning Profile...[/] [dim]({msg})[/]")
+        prefix = "[bold red]Power-Scanning[/]" if self.deep_scan else "[bold yellow]Scanning Profile[/]"
+        self.progress_bar.update(self.main_task_id, description=f"{prefix} [dim]({msg})[/]")
 
     def full_clean(self):
-        garbage = ['*.mp3', '*.m4a', '*.webm', '*.tmp', '*.part', '*.ytdl', '*.f*']
+        """Strictly additive logic: only removes known temporary/corrupt fragments."""
+        garbage = ['*.tmp', '*.part', '*.ytdl']
         for ext in garbage:
             for f in glob.glob(os.path.join(self.user_dir, ext)):
-                try: os.remove(f)
+                try: 
+                    if time.time() - os.path.getmtime(f) > 60:
+                        os.remove(f)
                 except: pass
 
     def cleanup_err_files(self, video_id):
+        """Cleans up specifically for a failed video ID."""
         try:
             for f in glob.glob(os.path.join(self.user_dir, f"*{video_id}*.*")):
                 if f.endswith(('.temp', '.part', '.ytdl')):
@@ -143,7 +150,7 @@ class TikTokEngine:
                     task.eta = "-"
 
     def get_ydl_opts(self, is_extractor=False):
-        """Constructs the heavily-optimized payloads"""
+        """Constructs the mode-specific payload"""
         opts = {
             'format': 'best[vcodec!=none]',
             'impersonate': ImpersonateTarget.from_str('chrome'),
@@ -151,22 +158,35 @@ class TikTokEngine:
             'quiet': True,
             'no_warnings': True,
             'ffmpeg_location': r'C:\yt-dlp',
-            'socket_timeout': 15,
-            'retries': 5,
+            'socket_timeout': 30 if self.deep_scan else 15,
+            'retries': 10 if self.deep_scan else 5,
             'nopart': False,
             'overwrites': True,
         }
         
         if is_extractor:
-            opts['extract_flat'] = True
-            opts['extractor_args'] = {'tiktok': {'web_id': 'random', 'app_info': '1180', 'api_hostname': 'api16-normal-c-useast1a.tiktokv.com'}}
+            if self.deep_scan:
+                # POWER MODE: Deep API Scan
+                opts['extract_flat'] = 'in_playlist'
+                opts['lazy_playlist'] = True
+                opts['playlist_items'] = '1-99999'
+            else:
+                # NORMAL MODE: Fast Meta Scan
+                opts['extract_flat'] = True
+                
+            opts['extractor_args'] = {
+                'tiktok': {
+                    'web_id': 'random', 
+                    'app_info': '1180', 
+                    'api_hostname': 'api16-normal-c-useast1a.tiktokv.com'
+                }
+            }
             if os.path.exists(COOKIE_FILE):
                 opts['cookiefile'] = COOKIE_FILE
         else:
             opts['connector_args'] = {'force_no_http2': True}
-            opts['http_chunk_size'] = 2621440 # 2.5MB micro-chunks (CDN bypass payload)
-            opts['concurrent_fragment_downloads'] = 4
-            opts['throttledratelimit'] = 25000
+            opts['http_chunk_size'] = 5242880 if self.deep_scan else 2621440
+            opts['concurrent_fragment_downloads'] = 5 if self.deep_scan else 4
             opts['progress_hooks'] = [self.master_progress_hook]
             opts['outtmpl'] = f'{self.user_dir}/%(title).50s [%(id)s].%(ext)s'
             opts['download_archive'] = os.path.join(self.user_dir, 'archive.txt')
@@ -180,41 +200,79 @@ class TikTokEngine:
         return opts
 
     def scout_routine(self):
-        """Metadata Stage: Constantly parses profile and feeds the PriorityQueue lazily."""
+        """Metadata Stage: God-Mode Triple-Fallback Scouter."""
         try:
-            with yt_dlp.YoutubeDL(self.get_ydl_opts(is_extractor=True)) as ydl:
-                # Use process=False to get the raw generator instantly, bypassing the 30+ second blocking playlist resolve
-                info_dict = ydl.extract_info(f"https://www.tiktok.com/@{self.username}", download=False, process=False)
-                entries = info_dict.get('entries')
-                
-                if entries:
-                    for e in entries:
-                        if shutdown_event.is_set(): break
-                        if not e: continue
-                        if isinstance(e, dict) and 'id' in e:
-                            vid_id = e['id']
-                            url = f"https://www.tiktok.com/@{self.username}/video/{vid_id}"
-                        
-                        # Priority 1 is standard queue
-                        task = VideoTask(priority=1, url=url, video_id=vid_id)
-                        self.task_queue.put(task)
-                        
-                        with status_lock:
-                            self.stats['total'] += 1
-                        self.progress_bar.update(self.main_task_id, total=self.stats['total'])
-                        
-                        # Anti-Ban Batch Pacing
-                        if self.stats['total'] > 0 and self.stats['total'] % 100 == 0:
-                            self.update_scanning_msg("Pacing Batch (Anti-Ban Sleep)...")
-                            time.sleep(2)
+            entries_discovered = []
+            
+            # --- ATTEMPT 1: Internal API Deep Scan (Preferred for Power Mode) ---
+            if self.deep_scan:
+                self.update_scanning_msg("Attempting API Deep-Scan...")
+                try:
+                    with yt_dlp.YoutubeDL(self.get_ydl_opts(is_extractor=True)) as ydl:
+                        info = ydl.extract_info(f"tiktokuser:{self.username}", download=False, process=True)
+                        if info and info.get('entries'):
+                            entries_discovered = list(info['entries'])
+                except Exception as e:
+                    log_error(f"Scout API Error (@{self.username})", str(e))
+
+            # --- ATTEMPT 2: Web Desktop Simulation (Fallback or Standard) ---
+            if not entries_discovered:
+                self.update_scanning_msg("Attempting Web Simulation...")
+                try:
+                    with yt_dlp.YoutubeDL(self.get_ydl_opts(is_extractor=True)) as ydl:
+                        # Standard mode uses process=False for speed, but Web Simulation uses True for thoroughness
+                        proc = True if self.deep_scan else False
+                        info = ydl.extract_info(f"https://www.tiktok.com/@{self.username}", download=False, process=proc)
+                        if info and info.get('entries'):
+                            entries_discovered = list(info['entries'])
+                except Exception as e:
+                    log_error(f"Scout Web Error (@{self.username})", str(e))
+
+            # --- ATTEMPT 3: Mobile Protocol Mimicry (Last Resort) ---
+            if not entries_discovered:
+                self.update_scanning_msg("Attempting Mobile Protocol...")
+                try:
+                    opts = self.get_ydl_opts(is_extractor=True)
+                    opts['impersonate'] = ImpersonateTarget.from_str('chrome:android')
+                    with yt_dlp.YoutubeDL(opts) as ydl:
+                        info = ydl.extract_info(f"https://m.tiktok.com/h5/share/usr/@{self.username}", download=False, process=True)
+                        if info and info.get('entries'):
+                            entries_discovered = list(info['entries'])
+                except Exception as e:
+                    log_error(f"Scout Mobile Error (@{self.username})", str(e))
+
+            # --- PROCESS DISCOVERED ENTRIES ---
+            if entries_discovered:
+                for e in entries_discovered:
+                    if shutdown_event.is_set(): break
+                    if not e: continue
+                    
+                    vid_id = e.get('id')
+                    # Standardize URL format
+                    url = f"https://www.tiktok.com/@{self.username}/video/{vid_id}"
+                    
+                    if not vid_id: continue
+                    
+                    task = VideoTask(priority=1, url=url, video_id=vid_id)
+                    self.task_queue.put(task)
+                    
+                    with status_lock:
+                        self.stats['total'] += 1
+                    self.progress_bar.update(self.main_task_id, total=self.stats['total'])
+                    
+                    # Pacing
+                    if self.stats['total'] % 50 == 0:
+                        time.sleep(0.5)
                             
-                if self.stats['total'] == 0:
-                    self.progress_bar.update(self.main_task_id, total=0)
-                else:
-                    self.progress_bar.update(self.main_task_id, description=f"[bold green]Executing Pipeline for @{self.username}[/]")
+            if self.stats['total'] == 0:
+                self.progress_bar.update(self.main_task_id, total=0, description=f"[bold red]@{self.username} - Blocked by TikTok[/]")
+            else:
+                status_txt = "Pipeline Ready" if not self.deep_scan else "Deep-Scan Complete"
+                self.progress_bar.update(self.main_task_id, description=f"[bold green]{status_txt} @{self.username}[/]")
+                    
         except Exception as e:
             import traceback
-            log_error("Scout Loop Error", traceback.format_exc())
+            log_error("Critical Scout Routine Crash", traceback.format_exc())
         finally:
             self.extractor_done.set()
 
@@ -386,27 +444,49 @@ def perform_bulk_update():
 
     console.print(Panel(f"[bold cyan]Bulk Update Core Activated: Found {len(usernames)} profiles[/]", title="TikTok Bulk Updater", border_style="green"))
 
+    summary_stats = []
+    total_new_vids = 0
+
     for i, user in enumerate(usernames, 1):
         if shutdown_event.is_set(): break
         console.print(f"\n[bold magenta]━━━━━━━━ Processing {i}/{len(usernames)}: @{user} ━━━━━━━━[/]")
         try:
-            engine = TikTokEngine(user)
+            # ACTIVATE DEEP SCAN FOR BULK POWER MODE
+            engine = TikTokEngine(user, deep_scan=True)
             engine.run_pipeline()
+            # Capture stats
+            new_vids = engine.stats.get('completed', 0)
+            failed_vids = engine.stats.get('failed', 0)
+            summary_stats.append((user, new_vids, failed_vids))
+            total_new_vids += new_vids
         except Exception as e:
             console.print(f"[bold red]✖ Failed @{user}: {e}[/]")
+            summary_stats.append((user, "ERROR", 0))
         
         if i < len(usernames) and not shutdown_event.is_set():
             time.sleep(2)
 
-    console.print(Panel("[bold green]All profiles successfully scanned and updated![/]", border_style="bold green"))
+    # Final Summary Table
+    table = Table(title="[bold green]Bulk Update Final Summary[/]", expand=True, border_style="green")
+    table.add_column("Profile (Username)", style="cyan")
+    table.add_column("New Videos Added", justify="right", style="bold green")
+    table.add_column("Failed", justify="right", style="bold red")
+
+    for user, new, failed in summary_stats:
+        table.add_row(f"@{user}", str(new), str(failed))
+
+    console.print("\n")
+    console.print(table)
+    console.print(Panel(f"[bold green]Bulk update complete! Total New Videos across all profiles: {total_new_vids}[/]", border_style="bold green"))
 
 if __name__ == "__main__":
-    console.print(Panel("[bold white]TikTok FastBulk Pipeline (v7.0) Enterprise Object-Oriented Edition[/]", style="blue"))
+    console.print(Panel("[bold white]TikTok FastBulk Pipeline (v7.6) Multi-Mode Edition[/]", style="blue"))
     u_input = console.input("[bold]Enter Username (or type 'update' or 'power'):[/] ")
     if u_input.strip().lower() == 'update':
         perform_update()
     elif u_input.strip().lower() == 'power':
         perform_bulk_update()
     elif u_input:
-        engine = TikTokEngine(u_input)
+        # NORMAL SCAN FOR SINGLE PROFILE
+        engine = TikTokEngine(u_input, deep_scan=False)
         engine.run_pipeline()
