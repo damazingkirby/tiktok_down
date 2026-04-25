@@ -130,6 +130,27 @@ class TikTokEngine:
                     os.remove(f)
         except: pass
 
+    def _enqueue_video(self, entry):
+        """Helper to standardize and queue a discovered video entry."""
+        if not entry: return False
+        vid_id = entry.get('id')
+        if not vid_id: return False
+        
+        # Standardize URL format
+        url = f"https://www.tiktok.com/@{self.username}/video/{vid_id}"
+        
+        task = VideoTask(priority=1, url=url, video_id=vid_id)
+        self.task_queue.put(task)
+        
+        with status_lock:
+            self.stats['total'] += 1
+        self.progress_bar.update(self.main_task_id, total=self.stats['total'])
+        
+        # Pacing
+        if self.stats['total'] % 50 == 0:
+            time.sleep(0.1)
+        return True
+
     def master_progress_hook(self, d):
         if shutdown_event.is_set():
             raise ValueError("Pipeline Abort Triggered")
@@ -200,71 +221,53 @@ class TikTokEngine:
         return opts
 
     def scout_routine(self):
-        """Metadata Stage: God-Mode Triple-Fallback Scouter."""
+        """Metadata Stage: God-Mode Triple-Fallback Scouter with Lazy discovery."""
         try:
-            entries_discovered = []
+            found_any = False
             
+            def consume(info):
+                nonlocal found_any
+                if not info or not info.get('entries'): return
+                for e in info['entries']:
+                    if shutdown_event.is_set(): break
+                    if self._enqueue_video(e):
+                        found_any = True
+
             # --- ATTEMPT 1: Internal API Deep Scan (Preferred for Power Mode) ---
             if self.deep_scan:
                 self.update_scanning_msg("Attempting API Deep-Scan...")
                 try:
                     with yt_dlp.YoutubeDL(self.get_ydl_opts(is_extractor=True)) as ydl:
                         info = ydl.extract_info(f"tiktokuser:{self.username}", download=False, process=True)
-                        if info and info.get('entries'):
-                            entries_discovered = list(info['entries'])
+                        consume(info)
                 except Exception as e:
                     log_error(f"Scout API Error (@{self.username})", str(e))
 
             # --- ATTEMPT 2: Web Desktop Simulation (Fallback or Standard) ---
-            if not entries_discovered:
+            if not found_any:
                 self.update_scanning_msg("Attempting Web Simulation...")
                 try:
                     with yt_dlp.YoutubeDL(self.get_ydl_opts(is_extractor=True)) as ydl:
                         # Standard mode uses process=False for speed, but Web Simulation uses True for thoroughness
                         proc = True if self.deep_scan else False
                         info = ydl.extract_info(f"https://www.tiktok.com/@{self.username}", download=False, process=proc)
-                        if info and info.get('entries'):
-                            entries_discovered = list(info['entries'])
+                        consume(info)
                 except Exception as e:
                     log_error(f"Scout Web Error (@{self.username})", str(e))
 
             # --- ATTEMPT 3: Mobile Protocol Mimicry (Last Resort) ---
-            if not entries_discovered:
+            if not found_any:
                 self.update_scanning_msg("Attempting Mobile Protocol...")
                 try:
                     opts = self.get_ydl_opts(is_extractor=True)
                     opts['impersonate'] = ImpersonateTarget.from_str('chrome:android')
                     with yt_dlp.YoutubeDL(opts) as ydl:
                         info = ydl.extract_info(f"https://m.tiktok.com/h5/share/usr/@{self.username}", download=False, process=True)
-                        if info and info.get('entries'):
-                            entries_discovered = list(info['entries'])
+                        consume(info)
                 except Exception as e:
                     log_error(f"Scout Mobile Error (@{self.username})", str(e))
 
-            # --- PROCESS DISCOVERED ENTRIES ---
-            if entries_discovered:
-                for e in entries_discovered:
-                    if shutdown_event.is_set(): break
-                    if not e: continue
-                    
-                    vid_id = e.get('id')
-                    # Standardize URL format
-                    url = f"https://www.tiktok.com/@{self.username}/video/{vid_id}"
-                    
-                    if not vid_id: continue
-                    
-                    task = VideoTask(priority=1, url=url, video_id=vid_id)
-                    self.task_queue.put(task)
-                    
-                    with status_lock:
-                        self.stats['total'] += 1
-                    self.progress_bar.update(self.main_task_id, total=self.stats['total'])
-                    
-                    # Pacing
-                    if self.stats['total'] % 50 == 0:
-                        time.sleep(0.5)
-                            
-            if self.stats['total'] == 0:
+            if not found_any:
                 self.progress_bar.update(self.main_task_id, total=0, description=f"[bold red]@{self.username} - Blocked by TikTok[/]")
             else:
                 status_txt = "Pipeline Ready" if not self.deep_scan else "Deep-Scan Complete"
