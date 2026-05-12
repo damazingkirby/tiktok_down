@@ -209,7 +209,7 @@ class TikTokEngine:
             opts['http_chunk_size'] = 5242880 if self.deep_scan else 2621440
             opts['concurrent_fragment_downloads'] = 5 if self.deep_scan else 4
             opts['progress_hooks'] = [self.master_progress_hook]
-            opts['outtmpl'] = f'{self.user_dir}/%(title).50s [%(id)s].%(ext)s'
+            opts['outtmpl'] = f'{self.user_dir}/[%(id)s] %(title).50s.%(ext)s'
             opts['download_archive'] = os.path.join(self.user_dir, 'archive.txt')
             
         global proxy_list, proxy_index
