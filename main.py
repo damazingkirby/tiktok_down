@@ -422,13 +422,19 @@ def perform_update():
     current_v = yt_dlp.version.__version__
     console.print(f"[*] Current Engine Version: [bold cyan]{current_v}[/]")
     
-    with console.status("[bold yellow]Contacting PyPI and fetching bleeding-edge yt-dlp core...[/]"):
+    with console.status("[bold yellow]Contacting GitHub and fetching latest nightly commit via uv...[/]"):
         try:
+            # Upgrade the github commit lock for yt-dlp
             subprocess.check_call(
-                [sys.executable, "-m", "pip", "install", "-U", "yt-dlp[default]"],
+                ["uv", "lock", "--upgrade-package", "yt-dlp"],
                 stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
             )
-            console.print("\n[bold green]✔ Engine completely upgraded! Please restart the script to apply the core upgrades.[/]")
+            # Sync the environment to apply the new commit
+            subprocess.check_call(
+                ["uv", "sync"],
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+            )
+            console.print("\n[bold green]✔ Engine completely upgraded to the latest GitHub nightly! Please restart the script to apply the core upgrades.[/]")
             sys.exit(0)
         except Exception as e:
             console.print(f"\n[bold red]✖ Update failed:[/] {e}")
