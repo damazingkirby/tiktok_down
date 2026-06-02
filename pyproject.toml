@@ -72,6 +72,6 @@ dependencies = [
     "uritemplate==4.2.0",
     "urllib3==2.6.3",
     "websockets==15.0.1",
-    "yt-dlp==2026.3.17",
+    "yt-dlp @ git+https://github.com/yt-dlp/yt-dlp.git@master",
     "yt-dlp-ejs==0.8.0",
 ]
