@@ -92,6 +92,7 @@ class TikTokEngine:
             os.makedirs(self.user_dir)
             
         self.task_queue = queue.PriorityQueue()
+        self.enqueued_ids = set() # Safety net for cross-attempt de-duplication
         self.extractor_done = threading.Event()
         
         # Stats & Execution Stage tracking
@@ -135,6 +136,11 @@ class TikTokEngine:
         if not entry: return False
         vid_id = entry.get('id')
         if not vid_id: return False
+        
+        # Avoid duplicate scheduling across compound scraping runs
+        if vid_id in self.enqueued_ids:
+            return False
+        self.enqueued_ids.add(vid_id)
         
         # Standardize URL format
         url = f"https://www.tiktok.com/@{self.username}/video/{vid_id}"
@@ -244,11 +250,11 @@ class TikTokEngine:
                     log_error(f"Scout API Error (@{self.username})", str(e))
 
             # --- ATTEMPT 2: Web Desktop Simulation (Fallback or Standard) ---
-            if not found_any:
+            # FIX: If deep_scan is active, always cross-reference via Web Simulation to capture missing new uploads
+            if not found_any or self.deep_scan:
                 self.update_scanning_msg("Attempting Web Simulation...")
                 try:
                     with yt_dlp.YoutubeDL(self.get_ydl_opts(is_extractor=True)) as ydl:
-                        # Standard mode uses process=False for speed, but Web Simulation uses True for thoroughness
                         proc = True if self.deep_scan else False
                         info = ydl.extract_info(f"https://www.tiktok.com/@{self.username}", download=False, process=proc)
                         consume(info)
