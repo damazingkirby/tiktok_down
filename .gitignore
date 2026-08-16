@@ -1,3 +1,30 @@
-\downloads
-\venv
-.venv
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Environments
+.venv/
+venv/
+env/
+
+# Downloads
+downloads/
+
+# Sensitive / runtime files
+tiktok_cookie.txt
+cookies.txt
+config.json
+proxies.txt
+errors.log
+errors.log.gz
+
+# Submodule / vendored folder
+TikTokDownloader-master/
+
+# IDE / tools
+.idea/
+.ruff_cache/
+.run/
