@@ -14,6 +14,12 @@ import urllib.parse
 from dataclasses import dataclass, field
 from yt_dlp.networking.impersonate import ImpersonateTarget
 
+try:
+    from curl_cffi import requests as cffi_requests
+    HAS_CURL_CFFI = True
+except ImportError:
+    HAS_CURL_CFFI = False
+
 # Rich UI Imports
 from rich.console import Console, Group
 from rich.live import Live
@@ -42,9 +48,69 @@ if os.path.exists(PROXIES_FILE):
         proxy_list = [line.strip() for line in f if line.strip()]
 thread_local.proxy_index = 0
 
+# Regex to extract secUid from TikTok profile HTML (same as TikTokDownloader-master)
+_SEC_UID_RE = re.compile(r'"verified":(?:false|true),"secUid":"([a-zA-Z0-9_-]+)"')
+
 def clean_msg(text):
     ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
     return ansi_escape.sub('', str(text)).strip()
+
+def fetch_sec_uid_cffi(username: str, cookie_file: str = None, max_attempts: int = 3) -> str:
+    """Use curl_cffi to impersonate Chrome and scrape the secUid from the TikTok profile page."""
+    if not HAS_CURL_CFFI:
+        return ""
+    
+    url = f"https://www.tiktok.com/@{username}"
+    
+    # Build cookie header from file if available
+    cookie_header = ""
+    if cookie_file and os.path.exists(cookie_file):
+        try:
+            with open(cookie_file, 'r', encoding='utf-8') as f:
+                lines = [l.strip() for l in f if l.strip() and not l.startswith('#')]
+            pairs = []
+            for line in lines:
+                parts = line.split('\t')
+                if len(parts) >= 7:
+                    pairs.append(f"{parts[5]}={parts[6]}")
+            cookie_header = "; ".join(pairs)
+        except Exception:
+            pass
+    
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Sec-Fetch-Dest": "document",
+        "Sec-Fetch-Mode": "navigate",
+        "Sec-Fetch-Site": "none",
+        "Sec-Fetch-User": "?1",
+        "Upgrade-Insecure-Requests": "1",
+    }
+    if cookie_header:
+        headers["Cookie"] = cookie_header
+    
+    for attempt in range(max_attempts):
+        try:
+            resp = cffi_requests.get(
+                url,
+                headers=headers,
+                impersonate="chrome136",
+                timeout=30,
+                allow_redirects=True,
+            )
+            if resp.status_code == 200:
+                m = _SEC_UID_RE.search(resp.text)
+                if m:
+                    return m.group(1)
+            log_error(f"cffi secUid fetch attempt {attempt+1}/{max_attempts}",
+                      f"HTTP {resp.status_code}, no secUid in response (len={len(resp.text)})")
+        except Exception as e:
+            log_error(f"cffi secUid fetch attempt {attempt+1}/{max_attempts}", str(e))
+        if attempt < max_attempts - 1:
+            time.sleep(5 * (attempt + 1))
+    return ""
 
 def log_error(vid_or_msg, error_details=""):
     details = clean_msg(error_details)
@@ -66,6 +132,67 @@ class VideoTask:
     eta: str = field(default="-", compare=False)
     retries_left: int = field(default=MAX_RETRIES, compare=False)
     title: str = field(default="", compare=False)
+
+def fetch_sec_uid_headless_chrome(username: str, timeout: int = 90) -> str:
+    """Launch headless Chrome using the real Chrome profile (with live TikTok cookies) to
+    fetch the TikTok profile page. Chrome will natively execute the WAF JS challenge and
+    has session cookies already, so it should succeed where HTTP clients fail."""
+    import shutil, tempfile
+
+    # Candidates for Chrome binary
+    for chrome_bin in ['/usr/bin/google-chrome', '/usr/bin/google-chrome-stable',
+                        '/usr/bin/chromium-browser', '/usr/bin/chromium']:
+        if os.path.exists(chrome_bin):
+            break
+    else:
+        log_error('headless_chrome_fetch', 'No Chrome binary found')
+        return ''
+
+    # Copy Chrome's Default profile to a temp dir so we can use it without locking issues
+    src_profile = os.path.expanduser('~/.config/google-chrome/Default')
+    with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmpdir:
+        profile_copy = os.path.join(tmpdir, 'Default')
+        if os.path.exists(src_profile):
+            try:
+                shutil.copytree(src_profile, profile_copy, dirs_exist_ok=True,
+                                ignore=shutil.ignore_patterns('SingletonLock', 'SingletonCookie', 'SingletonSocket', '*.log'))
+            except Exception as e:
+                log_error('headless_chrome_fetch', f'Profile copy warning (continuing): {e}')
+                profile_copy = tmpdir  # fall back to empty profile
+
+        url = f'https://www.tiktok.com/@{username}'
+        try:
+            result = subprocess.run(
+                [
+                    chrome_bin,
+                    '--headless=new',
+                    '--no-sandbox',
+                    '--disable-gpu',
+                    '--disable-dev-shm-usage',
+                    '--disable-extensions',
+                    f'--user-data-dir={tmpdir}',
+                    '--profile-directory=Default',
+                    f'--timeout={timeout * 1000}',  # milliseconds
+                    '--dump-dom',
+                    url,
+                ],
+                capture_output=True,
+                text=True,
+                timeout=timeout + 15,
+            )
+            html = result.stdout
+            if html:
+                m = _SEC_UID_RE.search(html)
+                if m:
+                    return m.group(1)
+            log_error('headless_chrome_fetch',
+                      f'No secUid in Chrome output (len={len(html)}, rc={result.returncode}, stderr={result.stderr[:300]})')
+        except subprocess.TimeoutExpired:
+            log_error('headless_chrome_fetch', f'Chrome subprocess timed out after {timeout}s')
+        except Exception as e:
+            log_error('headless_chrome_fetch', str(e))
+    return ''
+
 
 class ExtractorLogger:
     def __init__(self, engine):
@@ -91,9 +218,10 @@ class NullLogger:
 class TikTokEngine:
     """Full-History Deep Crawler Edition (v8.2) with retry-with-backoff for both scout and execution."""
     
-    def __init__(self, username, deep_scan=True):
+    def __init__(self, username, deep_scan=True, provided_secuid: str = ""):
         self.username = username.strip().replace("@", "")
         self.deep_scan = deep_scan
+        self.provided_secuid = provided_secuid.strip()
         self.user_dir = os.path.join("downloads", self.username)
         if not os.path.exists(self.user_dir):
             os.makedirs(self.user_dir)
@@ -244,9 +372,37 @@ class TikTokEngine:
                             console.print(f"\n[bold red]Extractor Error after {max_attempts} attempts:[/] {err_str}")
                 return None
 
-            # --- Full Profile Deep Pagination Crawl ---
-            self.update_scanning_msg("Paging through entire profile API history...")
-            info = try_extract(f"https://www.tiktok.com/@{self.username}")
+            # --- Step 1: Resolve secUid ---
+            sec_uid = self.provided_secuid  # User-provided takes top priority
+            
+            if not sec_uid and HAS_CURL_CFFI:
+                self.update_scanning_msg("Fetching secUid via curl_cffi Chrome impersonation...")
+                ctype, cval = self.cookie_status
+                cookie_path = cval if ctype == 'file' else None
+                sec_uid = fetch_sec_uid_cffi(self.username, cookie_file=cookie_path)
+                if sec_uid:
+                    console.print(f"[bold green]✓ secUid via curl_cffi: {sec_uid[:24]}...[/]")
+            
+            if not sec_uid:
+                self.update_scanning_msg("Fetching secUid via headless Chrome (runs WAF JS)...")
+                console.print(f"[cyan]ℹ Launching headless Chrome to bypass WAF for @{self.username}...[/]")
+                sec_uid = fetch_sec_uid_headless_chrome(self.username)
+                if sec_uid:
+                    console.print(f"[bold green]✓ secUid via headless Chrome: {sec_uid[:24]}...[/]")
+                else:
+                    console.print(f"[yellow]⚠ All secUid methods failed. Falling back to yt-dlp profile URL (may fail)...[/]")
+            
+            # --- Step 2: Build the correct scout URL ---
+            # If we have secUid, use tiktokuser: scheme to bypass yt-dlp page scraping
+            if sec_uid:
+                scout_url = f"tiktokuser:{sec_uid}"
+                self.update_scanning_msg(f"Using tiktokuser:{sec_uid[:16]}... for full history crawl")
+            else:
+                scout_url = f"https://www.tiktok.com/@{self.username}"
+                self.update_scanning_msg("Paging through entire profile API history (fallback)...")
+            
+            # --- Step 3: Full Profile Deep Pagination Crawl ---
+            info = try_extract(scout_url)
             if info:
                 entries = info.get('entries', []) if isinstance(info, dict) else info
                 for e in entries:
@@ -446,8 +602,18 @@ def signal_handler(sig, frame):
 signal.signal(signal.SIGINT, signal_handler)
 
 if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description="TikTok Full-History Deep Crawler v8.2")
+    parser.add_argument("username", nargs="?", help="TikTok username (without @)")
+    parser.add_argument("--secuid", default="", help="Pre-known secUid for the user (bypasses profile page scraping entirely)")
+    args = parser.parse_args()
+
     console.print(Panel("[bold white]TikTok Full-History Deep Crawler (v8.2) with Retry Backoff[/]", style="blue"))
-    u_input = console.input("[bold]Enter Username:[/] ")
+    
+    u_input = args.username or console.input("[bold]Enter Username:[/] ")
+    if args.secuid:
+        console.print(f"[bold cyan]Using provided secUid: {args.secuid[:24]}...[/]")
+    
     if u_input.strip():
-        engine = TikTokEngine(u_input, deep_scan=True)
+        engine = TikTokEngine(u_input, deep_scan=True, provided_secuid=args.secuid)
         engine.run_pipeline()
