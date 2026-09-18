@@ -56,6 +56,27 @@ if os.path.exists(PROXIES_FILE):
         proxy_list = [line.strip() for line in f if line.strip()]
 proxy_index = 0
 
+
+def parse_usernames(raw_input: str):
+    """Accept one or many usernames separated by spaces or commas."""
+    value = (raw_input or '').strip()
+    if not value:
+        return []
+
+    usernames = []
+    seen = set()
+    for token in re.split(r'[\s,]+', value):
+        clean = token.strip().replace('@', '').strip()
+        if not clean:
+            continue
+        if clean.lower() in {'update', 'power'}:
+            continue
+        if re.match(r'^[a-zA-Z0-9_.]+$', clean) and clean not in seen:
+            seen.add(clean)
+            usernames.append(clean)
+    return usernames
+
+
 def clean_msg(text):
     ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
     return ansi_escape.sub('', str(text)).strip()
@@ -126,6 +147,8 @@ class TikTokEngine:
 
         self.sec_uid_file = os.path.join(self.user_dir, ".sec_uid")
         self.sec_uid = self._load_cached_sec_uid()
+        self.archive_file = os.path.join(self.user_dir, "archive.txt")
+        self.archived_ids = self._load_archive()
 
         self.task_queue = queue.PriorityQueue()
         self.enqueued_ids = set()
@@ -136,6 +159,7 @@ class TikTokEngine:
             "total": 0,
             "completed": 0,
             "failed": 0,
+            "skipped": 0,
             "slideshows": 0,
             "start_time": time.time()
         }
@@ -176,6 +200,20 @@ class TikTokEngine:
             except Exception:
                 pass
 
+    def _load_archive(self):
+        """Loads previously downloaded video IDs into memory for instant pre-filtering."""
+        archived = set()
+        if os.path.exists(self.archive_file):
+            try:
+                with open(self.archive_file, 'r', encoding='utf-8') as f:
+                    for line in f:
+                        parts = line.strip().split()
+                        if parts:
+                            archived.add(parts[-1])
+            except Exception:
+                pass
+        return archived
+
     def update_scanning_msg(self, msg):
         prefix = "[bold red]Power-Scanning[/]" if self.deep_scan else "[bold yellow]Scanning Profile[/]"
         self.progress_bar.update(self.main_task_id, description=f"{prefix} [dim]({msg})[/]")
@@ -211,6 +249,12 @@ class TikTokEngine:
         if vid_id in self.enqueued_ids:
             return False
         self.enqueued_ids.add(vid_id)
+
+        # Instant in-memory pre-filtering: skip already downloaded videos
+        if vid_id in self.archived_ids:
+            with status_lock:
+                self.stats['skipped'] += 1
+            return False
 
         # Cache sec_uid if entry contains channel_id
         entry_channel_id = entry.get('channel_id')
@@ -267,17 +311,20 @@ class TikTokEngine:
     def get_ydl_opts(self, is_extractor=False, use_cookies=True):
         """Constructs robust yt-dlp options with universal format support."""
         opts = {
-            # FIX: Universal format selector. Prioritizes best merged video, falls back to best audio/photo post.
+            # Universal format selector. Prioritizes best merged video, falls back to best audio/photo post.
             'format': 'bestvideo+bestaudio/best[vcodec!=none]/best',
             'impersonate': ImpersonateTarget.from_str('chrome'),
             'logger': ExtractorLogger(self) if is_extractor else NullLogger(),
             'quiet': True,
             'no_warnings': True,
-            'socket_timeout': 30 if self.deep_scan else 20,
-            'retries': 8 if self.deep_scan else 5,
+            'socket_timeout': 20 if self.deep_scan else 15,
+            'retries': 6 if self.deep_scan else 4,
             'nopart': False,
             'overwrites': True,
-            'writethumbnail': True,  # Ensures cover/slides are captured for all posts
+            'writethumbnail': False,  # Disabled for maximum download speed and zero companion image clutter
+            'buffersize': 1048576,    # 1MB buffer to reduce disk syscalls
+            'http_chunk_size': 5242880,  # 5MB chunking for high-speed fragment streaming
+            'concurrent_fragment_downloads': 5,
         }
 
         if SYSTEM_FFMPEG:
@@ -297,7 +344,7 @@ class TikTokEngine:
         else:
             opts['progress_hooks'] = [self.master_progress_hook]
             opts['outtmpl'] = f'{self.user_dir}/[%(id)s] %(title).50s.%(ext)s'
-            opts['download_archive'] = os.path.join(self.user_dir, 'archive.txt')
+            opts['download_archive'] = self.archive_file
 
         global proxy_list, proxy_index
         if proxy_list:
@@ -340,7 +387,7 @@ class TikTokEngine:
                     log_error(f"Scout API Cached secUid Error (@{self.username})", str(e))
 
             # --- STAGE 2: Web Desktop Profile Scan (Native SlardarWAF Solver) ---
-            if not found_any or self.deep_scan:
+            if not found_any:
                 self.update_scanning_msg("Scanning Web Profile Page...")
                 try:
                     with yt_dlp.YoutubeDL(self.get_ydl_opts(is_extractor=True)) as ydl:
@@ -401,6 +448,8 @@ class TikTokEngine:
         # Execution Attempt with stream refresh on 403 or format fallback
         try:
             thread_local.ydl.download([task.url])
+            with status_lock:
+                self.archived_ids.add(task.video_id)
             return (True, task)
         except Exception as primary_exc:
             err_str = str(primary_exc)
@@ -412,6 +461,8 @@ class TikTokEngine:
                         task.status = "Refreshing URL"
                     thread_local.ydl = yt_dlp.YoutubeDL(self.get_ydl_opts(is_extractor=False))
                     thread_local.ydl.download([task.url])
+                    with status_lock:
+                        self.archived_ids.add(task.video_id)
                     return (True, task)
                 except Exception as fallback_exc:
                     err_str = str(fallback_exc)
@@ -442,6 +493,7 @@ class TikTokEngine:
 
         summary = (
             f"[bold cyan]Enqueued:[/] {self.stats['total']}  |  "
+            f"[bold blue]Saved:[/] {self.stats['skipped']}  |  "
             f"[bold green]Success:[/] {self.stats['completed']}  |  "
             f"[bold red]Failed:[/] {self.stats['failed']}  |  "
             f"[bold magenta]Slideshows:[/] {self.stats['slideshows']}  |  "
@@ -531,7 +583,7 @@ class TikTokEngine:
         final_report = Group(
             Panel(f"Pipeline Completed in [bold cyan]{time.strftime('%H:%M:%S', time.gmtime(elapsed))}[/]", style="green"),
             Text(
-                f"Target: {self.stats['total']} | Executed: {self.stats['completed']} | Slideshows: {self.stats['slideshows']} | Failed: {self.stats['failed']}",
+                f"Target: {self.stats['total']} | Already Saved: {self.stats['skipped']} | Executed: {self.stats['completed']} | Slideshows: {self.stats['slideshows']} | Failed: {self.stats['failed']}",
                 style="bold white",
                 justify="center"
             )
@@ -650,7 +702,23 @@ if __name__ == "__main__":
         perform_update()
     elif choice == 'power':
         perform_bulk_update()
-    elif u_input.strip():
-        # NORMAL SCAN FOR SINGLE PROFILE
-        engine = TikTokEngine(u_input, deep_scan=False)
-        engine.run_pipeline()
+    else:
+        usernames = parse_usernames(u_input)
+        if not usernames:
+            console.print(Panel("[bold yellow]No valid usernames supplied.[/]", style="yellow"))
+        elif len(usernames) == 1:
+            engine = TikTokEngine(usernames[0], deep_scan=False)
+            engine.run_pipeline()
+        else:
+            console.print(Panel(
+                f"[bold cyan]Queued {len(usernames)} profiles from a single input.[/]",
+                title="Multi-Profile Download",
+                border_style="cyan"
+            ))
+            for index, username in enumerate(usernames, 1):
+                console.print(f"\n[bold magenta]━━━━━━━━ Profile {index}/{len(usernames)}: @{username} ━━━━━━━━[/]")
+                engine = TikTokEngine(username, deep_scan=False)
+                engine.run_pipeline()
+                if index < len(usernames):
+                    time.sleep(1)
+
