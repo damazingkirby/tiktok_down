@@ -15,6 +15,7 @@ downloads/
 
 # Sensitive / runtime files
 tiktok_cookie.txt
+tiktok_cookies.txt
 cookies.txt
 config.json
 proxies.txt
